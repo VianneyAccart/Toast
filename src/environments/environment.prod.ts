@@ -1,4 +1,5 @@
 export const environment = {
   production: true,
-  toastHidingDelay: 100000,
+  toastHidingDelay: 5000,
+  autoHideErrorToast: false,
 };

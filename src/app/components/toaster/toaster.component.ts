@@ -11,10 +11,11 @@ import { environment } from 'src/environments/environment';
 export class ToasterComponent implements OnInit {
   currentToasts: ToastEvent[] = [];
   toastHidingDelay: number = environment.toastHidingDelay;
+  autoHideErrorToast: boolean = environment.autoHideErrorToast;
 
   constructor(
     private toastService: ToastService,
-    private cdr: ChangeDetectorRef
+    private changerDetectorRef: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -25,16 +26,15 @@ export class ToasterComponent implements OnInit {
     this.toastService.toastEvents$.subscribe((toasts) => {
       const currentToast: ToastEvent = {
         type: toasts.type,
-        title: toasts.title,
         message: toasts.message,
       };
       this.currentToasts.push(currentToast);
-      this.cdr.detectChanges();
+      this.changerDetectorRef.detectChanges();
     });
   }
 
   dispose(index: number) {
     this.currentToasts.splice(index, 1);
-    this.cdr.detectChanges();
+    this.changerDetectorRef.detectChanges();
   }
 }

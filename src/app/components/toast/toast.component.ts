@@ -25,10 +25,9 @@ export class ToastComponent implements OnInit {
   @Input()
   type!: EventTypes;
 
-  @Input()
-  title!: string;
-
   @Input() delay!: number;
+
+  @Input() autoHideErrorToast!: boolean;
 
   @Input()
   message!: string;
@@ -44,7 +43,8 @@ export class ToastComponent implements OnInit {
       this.toastEl.nativeElement,
       this.type === EventTypes.Error
         ? {
-            autohide: false,
+            autohide: this.autoHideErrorToast,
+            delay: this.delay,
           }
         : {
             delay: this.delay,
